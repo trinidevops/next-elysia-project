@@ -6,4 +6,4 @@ const user = new Elysia({ prefix: 'api/users' })
 
   export type Users = typeof user
 
-  export const GET = user.fetch
+    export const GET = user.fetch
