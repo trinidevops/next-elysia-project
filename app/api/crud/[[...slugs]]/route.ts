@@ -1,9 +1,7 @@
-import { Elysia }  from 'elysia'
+import {crud} from '../../../hono-server/crud'
 
-const app = new Elysia({ prefix: 'api/crud' })
-  .get('/', ()=>'hi xoxoxo')
-  .listen(8000)
+import {handle} from 'hono/vercel'
 
-  export type App = typeof app
 
-  export const GET = app.fetch
+export type AppType = typeof crud
+export const GET = handle(crud)
