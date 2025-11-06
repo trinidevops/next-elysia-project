@@ -1,15 +1,10 @@
 import mongoose from 'mongoose'
 
-const MONGO_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/hono-db'
+await mongoose.connect(process.env.MONGODB_URL || "" ).catch((error) => {
+	console.log("Error connecting to database:", error);
+});
 
-export async function dbconnect() {
+const client = mongoose.connection.getClient().db("myDB");
 
-  try {
-    await mongoose.connect(MONGO_URL)
-    console.log('✅ Connected to MongoDB via Mongoose')
-    return mongoose.connection
-  } catch (error) {
-    console.error('❌ MongoDB connection error:', error)
-    throw error
-  }
-}
+export { client };
+
