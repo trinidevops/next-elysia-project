@@ -4,10 +4,6 @@ import { users } from './users'
 import { crud } from './crud'
 
 
-
-
-
-
 const app = new Hono().basePath('/api')
 .route('/', crud ).route('/users', users)
 

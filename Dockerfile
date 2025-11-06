@@ -1,21 +1,21 @@
-# Use the official Bun Alpine image
-FROM oven/bun:canary-alpine
+# install dependencies into temp directory
+# this will cache them and speed up future builds
+FROM oven/bun:alpine AS base
+WORKDIR /usr/src/app
 
-WORKDIR /app
-
-# Copy dependency files first (better caching)
+# Copy package files
 COPY package.json bun.lockb* ./
 
 
-# Install dependencies
-RUN bun install
+# Install dependencies (including dev)
+RUN bun install --frozen-lockfile
 
-# Copy the rest of your project
+# Copy all project files
 COPY . .
 
-# Optional – expose a port if you’re running a server
+
+# Expose Next.js port
 EXPOSE 3000
 
-
-# Start the app
+# Run the app
 CMD ["bun", "run", "dev"]
